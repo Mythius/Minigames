@@ -1,0 +1,2 @@
+# Minigames
+Compilation of Minigames
