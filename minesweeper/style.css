@@ -1,0 +1,15 @@
+body{
+    text-align: center;   
+}
+game,game2{
+    display: grid;
+    left: 20%;
+    position: absolute;
+}
+game2{
+    z-index: 1;   
+}
+tile{
+    background-image: contain;
+    transition: transform .3s;
+}
