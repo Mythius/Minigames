@@ -1,0 +1,26 @@
+body{
+    text-align: center   
+}
+#game{
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(40px,1fr));
+    width: 320px;
+    border: 1px solid black;
+    margin-left: auto;
+    margin-right: auto;
+}
+.tile{
+    width: 38px;
+    height: 38px;
+    background-color: darkgreen;
+    border: 1px solid black;
+    outline: 0;
+    padding: 0px;
+    background-size: contain;
+}
+.b{
+    background-image: url(pieces/0.png);
+}
+.w{
+    background-image: url(pieces/1.png);    
+}
