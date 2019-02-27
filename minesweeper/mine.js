@@ -12,8 +12,8 @@ Grid.prototype.sameColor=function(x,y,c){
 }
 function makeBombs(amount){
     function s(){
-        var a=random(1,10);
-        var b=random(1,10);
+        var a=random(1,width);
+        var b=random(1,height);
         if(!minefield.isBomb(a,b)){
             minefield.setImage(a,b,'imgs/bomb.png');
         } else s();
@@ -23,8 +23,8 @@ function makeBombs(amount){
     }
 }
 function calcNums(){
-    for(let i=1;i<=10;i++){
-        for(let j=1;j<=10;j++){
+    for(let i=1;i<=width;i++){
+        for(let j=1;j<=height;j++){
             if(!minefield.isBomb(i,j)){
                 var amount=0;
                 for(let k=-1;k<=1;k++){
@@ -37,11 +37,12 @@ function calcNums(){
         }
     }
 }
-var cover=new Grid(obj('game2'),10,10,30);
-var minefield=new Grid(obj('game'),10,10,30);
+var width=30,height=30,bombs=99;
+var cover=new Grid(obj('game2'),width,height,30);
+var minefield=new Grid(obj('game'),width,height,30);
 cover.setImageAll('imgs/cover.png');
-for(let i=1;i<=10;i++){
-    for(let j=1;j<=10;j++){
+for(let i=1;i<=width;i++){
+    for(let j=1;j<=height;j++){
         cover.getTile(i,j).on('click',function(){
             clearArea(i,j);
         });
@@ -72,7 +73,6 @@ for(let i=1;i<=10;i++){
                         }
                     }
                 }
-                console.log(number+' '+amount);
             }
         });
     }
@@ -81,7 +81,7 @@ function clearArea(x,y){
     if(cover.equals(x,y,'cover')&&playing){
        uncover(x,y);
         if(minefield.isBomb(x,y)){
-            die();   
+            die();
         } else if(minefield.isEmpty(x,y)){
             for(let i=-1;i<=1;i++){
                 for(let j=-1;j<=1;j++){
@@ -97,7 +97,7 @@ function uncover(x,y){
     cover.setImage(x,y,'');
     cover.setColor(x,y,'Transparent');
     uncovered++;
-    if(uncovered==89) win();
+    if(uncovered==width*height-bombs) win();
 }
 function time(){
     secs++;
@@ -106,10 +106,10 @@ function time(){
     },1000);
 }
 document.on('mousedown',function(){
-    if(secs==0)time();
+    if(secs==0) time();
 });
 function win(){playing=false;alert('You win! Time: '+secs);}
 function die(){playing=false;alert('You lose!');}
 var playing=true,uncovered=0,secs=0;
-makeBombs(10);
+makeBombs(bombs);
 calcNums();
