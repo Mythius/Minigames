@@ -1,0 +1,10 @@
+game{
+    width: 600px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(0px,20px));
+    background-color: #222;
+}
+tile{
+    width: 20px;
+    height: 20px;
+}
