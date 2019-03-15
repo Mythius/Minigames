@@ -1,0 +1,77 @@
+<!DOCTYPE html
+<html>
+	<head>
+		<title>wooo</title>
+		<style>
+		</style>
+		<script src=helpers.js></script>
+		<script src=grid.js></script>
+	</head>
+	<body>
+	<grid></grid>
+	<script>
+		var gameboard = new Grid(obj('grid'),15,15,30);
+		gameboard.setColorAll('black');
+		
+		var Piece = function(data,color,xp){
+			y=5;
+			x=xp;
+			var rot=0;
+			function toBin(hex,d){
+				var i=d,s='';
+				while(i--)s+='0';
+				s+='0';
+				return (s+parseInt(hex,16).toString(2)).substr(-d);
+			}
+			function display(cx,cy,r,col){
+				var val=toBin(data[r],16);
+				console.log(data[r]);
+				var c=0;
+				for(let i=0;i<4;i++){
+					for(let j=0;j<4;j++){
+						if(val[c++]=='1'){
+							gameboard.setColor(x+j,y+i,col);
+						}
+					}
+				}
+			}
+			this.parse=function(hx,d){
+				return toBin(hx,d);
+			}
+			this.display=function(){
+				var val=toBin(data[rot]);
+				display(x,y,rot,color);
+			}
+			this.rotate=function(dir){
+				if(dir!=undefined){
+					rot+=dir;
+					rot=(rot+4)%4;
+				}
+			}
+			this.clear=function(){
+				display(x,y,rot,'black');
+			}
+		}
+		var pieces={
+			i:['0f00','2222','00f0','4444'],
+			j:['44c0','8e00','6440','0e20'],
+			l:['4460','0e80','c440','2e00'],
+			o:['cc00','cc00','cc00','cc00'],
+			s:['06c0','8c40','6c00','4620'],
+			
+			color:{
+				i:'cyan',
+				j:'blue',
+				l:'orange',
+				o:'yellow',
+				s:'green',
+				t:'purple',
+				z:'red'
+			}
+		};
+		var p1 = new Piece(pieces.j,pieces.color.j,3);
+		p1.display();
+		
+	</script>
+	</body>
+</html>
