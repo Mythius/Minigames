@@ -3,6 +3,19 @@
     <head>
         <title>Choose Your MAIN</title>
         <style>
+            body{
+                text-align: center; 
+                background-color: #222;
+            }
+            @font-face{
+                font-family: smashbros;
+                src: url(ssb.ttf);
+            }
+            h1{
+                font-family: smashbros;
+                text-shadow: 2px 2px black;
+                color: white;
+            }
             button{
                 padding: 5px;
                 background-color: black;
@@ -10,9 +23,10 @@
                 outline: 0;
                 color: white;
                 margin-top: 5px;
-                padding-left: 10px;
-                padding-right: 10px;
+                padding-left: 20px;
+                padding-right: 20px;
                 transition: background-color .3s, color .3s;
+                font-size: 30px;
             }
             button:hover{
                 background-color: gray;
@@ -235,8 +249,12 @@
                                 } else ymi('Shulk');
                             } else {
                                 if(path.length==4){
-                                    ask('Thoughts on killing?',['Every move should kill','I can be patient','Pit/Dark Pit']);   
-                                }
+                                    ask('Thoughts on killing?',['Every move should kill','I can be patient','I\'m a pacifist']);   
+                                } else if(path[4]==0){
+                                    ymi('Ike');   
+                                } else if(path[4]==1){
+                                    ymi('Mii Swardfighter');   
+                                } else ymi('Pit / Darkpit');
                             }
                         } else {
                             if(path.length==3){
