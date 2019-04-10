@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Choose Your MAIN</title>
+        <style>
+            button{
+                padding: 5px;
+                background-color: black;
+                border: 2px solid gray;
+                outline: 0;
+                color: white;
+                margin-top: 5px;
+                padding-left: 10px;
+                padding-right: 10px;
+                transition: background-color .3s, color .3s;
+            }
+            button:hover{
+                background-color: gray;
+                color: black;
+            }
+        </style>
+    </head>
+    <body>
+        
+        <script>
+            var path=[];
+            function ask(q,a){
+                document.body.innerHTML='<h1>'+q+'</h1';
+                for(let i=0;i<a.length;i++){   
+                    var b=document.createElement('button');
+                    b.innerHTML=a[i];
+                    document.body.appendChild(b);
+                    document.body.innerHTML+='<br>';
+                }
+                var btns=document.querySelectorAll('button');
+                for(let i=0;i<btns.length;i++){
+                    btns[i].addEventListener('click',function(){
+                        next(i);
+                    });  
+                }
+            }
+            ask('How far away do you want to be from your opponent?',['Whatever I feel like in the moment','Far enough so they can\'t reach me','Far enough so I can hit them first','Anywhere I\'m not being hit','Right in their face']);
+            
+            function next(o){
+                path.push(o);
+                if(path[0]==0){
+                    if(path.length==1){
+                        ask('How indecisive are you?',['It takes me an hour to decide which cereal I want','Fairly']);  
+                    } else if(path[1]==0){
+                        if(path.length==2){
+                            ask('Really?',['Absolutely','Well... no']);   
+                        } else if(path[2]==0){
+                            ymi('Random Button');
+                        } else {
+                            ymi('Pokemon Trainer');
+                        }
+                    } else if(path[1]==1){
+                        if(path.length==2){
+                            ask('Do you like practicing ridiculously difficult combos?',['Of course','I\'m good']);
+                        } else if(path[2]==0){
+                            if(path.length==3){
+                                ask('Do you like weird unpredictable glitches?',['Watching the game break gives me life','No']);
+                            } else if(path[3]==0){
+                                ymi('Ice Climbers');   
+                            } else {
+                                if(path.length==4){
+                                    ask('Do you sometimes like landing those ridiculous combos?',['Everything must be true','Why not?','If twitter\'s happy, I\'m happy']);   
+                                } else if(path[4]==0){
+                                    ymi('Peach/Daisy');   
+                                } else if(path[4]==1) {
+                                    if(path.length==5){
+                                        ask('Do you want to play a low tier without actually playing a low tier?',['Sure','NO']);   
+                                    } else if(path[5]==0){
+                                        ymi('Pichu');  
+                                    } else ymi('Pikachu');
+                                } else ymi('Falco');
+                            }
+                        } else {
+                            if(path.length==3){
+                                ask('How much do you wan\'t your opponent to hate you?',['It would be nice if thy cry','I wan\'t to make Friends']);   
+                            } else if(path[3]==0){
+                                if(path.length==4){
+                                    ask('What do you think is the best way to piss people off',['Trip them if they do anything','Ignore every single hit','Rage but more']);
+                                } else if(path[4]==0){
+                                    ymi('Diddy Kong');   
+                                } else if(path[4]==1){
+                                    ymi('King K Rool');   
+                                } else ymi('Lucario');
+                            } else {
+                                if(path.length==4){
+                                    ask('Are you fine with those friends being furries',['Still not cool','SonicFox made it cool']);   
+                                } else if(path[4]==0){
+                                    if(path.length==5){
+                                        ask('Thoughts on grab combos?',['They\'re pretty fun','Who needs those?','Why grab combo, when you can kill throw?']);
+                                    } else if(path[5]==0){
+                                        ymi('Mario/Dr. Mario');   
+                                    } else if(path[5]==1){
+                                        ymi('Lucas');   
+                                    } else ymi('Ness');
+                                } else ymi('Wolf');
+                            }
+                        }
+                    }
+                } else if(path[0]==1){
+                    if(path.length==1){
+                        ask('What if they get close to you?',['Hope they won\'t','Push them back']);   
+                    } else if(path[1]==0){
+                        if(path.length==2){
+                            ask('But you do wan\'t some close range moves, right?',['Who says I have to?','As a last resort','"Close range" in the loosest possible sense']);   
+                        } else if(path[2]==0){
+                            if(path.length==3){
+                                ask('Do you wan\'t to lab out ridiculous kill setups?',['Not often','3 hours a day']);   
+                            } else if(path[3]==0){
+                                ymi('Mii Gunner');
+                            } else {
+                                if(path.length==4){
+                                    ask('Do you wan\'t to grab people?',['Occaisionally','Never']);   
+                                } else if(path[4]==0){
+                                    ymi('Duck Hunt');   
+                                } else ymi('Pac-Man');
+                            }
+                        } else if(path[2]==1){
+                            if(path.length==3){
+                                ask('How do you wan\'t to get kills?',['While looking cool','Offstage']);   
+                            } else if(path[3]==0){
+                                ymi('Zelda');   
+                            } else {
+                                if(path.length==4){
+                                    ask('How important is being cute?',['Not much','Somewhat','Incredibly']);
+                                } else if(path[4]==0){
+                                    ymi('Wii Fit Trainer');   
+                                } else if(path[4]==1){
+                                    ymi('Villager');
+                                } else ymi('Isabelle');
+                            }
+                        } else ymi('Simon/Richter');
+                    } else {
+                        if(path.length==2){
+                            ask('Do you like weird gimmics?',['Yes','I want to be normal']);   
+                        } else if(path[2]==0){
+                            if(path.length==3){
+                                ask('Do you like solving math problems?',['5 times 5 is 25','Not much']);   
+                            } else if(path[3]==0){
+                                ymi('Robin');   
+                            } else ymi('Olimar');
+                        } else {
+                            if(path.length==3){
+                                ask('Do you like using Items',['Yes','Not Really']);   
+                            } else if(path[3]==1){
+                                if(path.length==4){
+                                    ask('Sometimes we have to make compromises',['Ok']);
+                                } else {
+                                    debugger;
+                                    path.pop();
+                                    path.pop();
+                                    next(0);
+                                }
+                            } else {
+                                if(path.length==4){
+                                    ask('Do you mind getting Comboed?',['Touch me and you explode','Whatever happens, happens','No thanks']);   
+                                } else if(path[4]==0){
+                                    ymi('Snake');   
+                                } else if(path[4]==1){
+                                    ymi('R.O.B.');
+                                } else {
+                                    if(path.length==5){
+                                        ask('Do you wan\'t your opponent to die?',['At some point','I can\'t decide','I\'m happy to wait']);
+                                    } else if(path[5]==0){
+                                        ymi('Link');   
+                                    } else if(path[5]==1){
+                                        ymi('Toon Link');
+                                    } else ymi('Young Link');
+                                }
+                            }
+                        }
+                    }
+                } else if(path[0]==2){
+                    if(path.length==1){
+                        ask('Do you want to be fast',['Who doesn\'t?','I\'m good']);
+                    } else if(path[1]==0){
+                        if(path.length==2){
+                            ask('Do you mind getting edgeguarded?',['You really think someone would do that?','I\'d rather not']);   
+                        } else if(path[2]==0){
+                            if(path.length==3){
+                                ask('Do you want to think?',['Dost thou taketh me for a simpleton?','Do I look like a nerd?']);   
+                            } else if(path[3]==0){
+                                ymi('Marth');   
+                            } else {
+                                if(path.length==4){
+                                    ask('Thoughts on camping?',['I\'m fine with it','Impossible']);   
+                                } else if(path[4]==0){
+                                    ymi('Cloud');   
+                                } else {
+                                    if(path.length==5){
+                                        ask('Why not?',['I cannot contain my thirst for blood','Camping is Boring and Stupid']);   
+                                    } else if(path[5]==0){
+                                        ymi('Bowser');   
+                                    } else {
+                                        if(path.length==6){
+                                            ask('Are you lesbian',['yES','No']);   
+                                        } else if(path[6]==0){
+                                            ymi('Lucina');   
+                                        } else ymi('Chrom');
+                                    }
+                                }
+                            }
+                        } else {
+                            if(path.length==3){
+                                ask('Do you mind dying at 50%?',['Life is fleeting. Victory is eternal','I think I\'ll pass']);   
+                            } else if(path[3]==0){
+                                ymi('Mewtwo');   
+                            } else {
+                                if(path.length==4){
+                                    ask('What about being comboed or camped out?',['Everyone has a weakness','Actually I don\'t want a weakness']);    
+                                } else if(path[4]==0){
+                                    ymi('Ridley');   
+                                } else ymi('Palutena');
+                            }
+                        }
+                    } else {
+                        if(path.length==2){
+                            ask('Do you watch anime?',['I own Sward Art Online merchandise','Sometimes','Never']);
+                        } else if(path[2]==0){
+                            ymi('Corrin');   
+                        } else if(path[2]==1){
+                            if(path.length==3){
+                                ask('How long to you want to survive?',['Just kill them first','If I die I uninstall','Fairly Long. Hopefully']);   
+                            } else if(path[3]==0){
+                                ymi('Bayonetta');   
+                            } else if(path[3]==1){
+                                if(path.length==4){
+                                    ask('Do you quote memes in public?',['A whole lot','Sometimes']);   
+                                } else if(path[4]==0){
+                                    ymi('DEDEDE');   
+                                } else ymi('Shulk');
+                            } else {
+                                if(path.length==4){
+                                    ask('Thoughts on killing?',['Every move should kill','I can be patient','Pit/Dark Pit']);   
+                                }
+                            }
+                        } else {
+                            if(path.length==3){
+                                ask('Do you want a gun?',['Pew Pew','Pew Pew Pew Pew Pew','Nah']);
+                            } else if(path[3]==0){
+                                ymi('Samus / Dark Samus');   
+                            } else if(path[3]==1){
+                                ymi('Mega Man');   
+                            } else ymi('Mr. Game and Watch');
+                        }
+                    }
+                } else if(path[0]==3){
+                    if(path.length==1){
+                        ask('Do you wan\'t to kill easily',['Just keep me safe','Give me blood']);   
+                    } else if(path[1]==0){
+                        if(path.length==2){
+                            ask('Do you like moving',['Never','Always']);   
+                        } else if(path[2]==0){
+                            ymi('Rosalina');   
+                        } else ymi('Sonic');
+                    } else {
+                        if(path.length==2){
+                            ask('Do you want to kill easily AND quickly?',['I\'ll wait','Even if it kills me']);   
+                        } else if(path[2]==0){
+                            ymi('Wario');   
+                        } else ymi('Jigglypuff');
+                    }
+                } else {
+                    if(path.length==1){
+                        ask('How do you want to get that close?',['Pray','Be Fast']);
+                    } else if(path[1]==0){
+                        if(path.length==2){
+                            ask('How hard do you want to combo people',['What\'s a combo?','I want to kill of a high % grab','I don\'t want them to touch the ground']);   
+                        } else if(path[2]==0){
+                            if(path.length==3){
+                                ask('How often do you taunt?',['After every kill','After every hit']);   
+                            } else if(path[3]==0){
+                                ymi('Ganondorf');   
+                            } else ymi('Incineroar');
+                        } else if(path[2]==1) {
+                            ymi('Donkey Kong');   
+                        } else {
+                            if(path.length==3){
+                                ask('How much free time do you have?',['A lot','Some']);   
+                            } else if(path[3]==0){
+                                ymi('Ryu\Ken');   
+                            } else {
+                                if(path.length==4){
+                                    ask('Do you secretly wish you had falcon punch',['Yes','No (LIE)']);   
+                                } else if(path[4]==0){
+                                    ymi('Kirby');   
+                                } else ymi('Luigi');
+                            }
+                        }
+                    } else {
+                            if(path.length==2){
+                                ask('Are you an air fighter?',['I ain\'t no air fighter','Yes']);   
+                            } else if(path[2]==0){
+                                ymi('Little Mac');   
+                            } else {
+                                if(path.length==3){
+                                    ask('If you get a cool combo, will you post it on twitter?',['In a heartbeat','It\'s fine']);   
+                                } else if(path[3]==0){
+                                    if(path.length==4){
+                                        ask('Do you want to be hit by cool combos?',['Not a lot','Equivalent Exchange, baby']);   
+                                    } else if(path[4]==0){
+                                        if(path.length==5){
+                                            ask('Did you ever grow out of your Naruto run phase?',['No','Kinda?']);   
+                                        } else if(path[5]==0){
+                                            ymi('Greninja');   
+                                        } else ymi('Meta Knight');
+                                    } else {
+                                        if(path.length==5){
+                                            ask('Thaughts on slow motion?',['Yes','Double Yes']);   
+                                        } else if(path[5]==0){
+                                            ymi('Roy');   
+                                        } else ymi('Captain Falcon');
+                                    }
+                                } else {
+                                    if(path.length==4){
+                                        ask('Do you like to do damage?',['If they\'re getting hit that means I\'m winning right?','A decent amount','Way too much']);   
+                                    } else if(path[4]==0){
+                                        if(path.length==5){
+                                            ask('How many levels of irony are you on?',['I\'m pretty earnest','S U C C']);   
+                                        } else if(path[5]==0){
+                                            ymi('Skeik');   
+                                        } else ymi('Mii Brawler');
+                                    } else if(path[4]==1){
+                                        if(path.length==5){
+                                            ask('Frame 1 Jab?',['Back in my day I had frame 1 damage options...','Frame 1 Jab!']);
+                                        } else if(path[5]==0){
+                                            ymi('Fox');   
+                                        } else ymi('Zero Suit Samus');
+                                    } else {
+                                        if(path.length==5){
+                                            ask('Do you want a trick to boost damage?',['Why not?','Just give me the damage.']);
+                                        } else if(path[5]==0){
+                                            ymi('Inkling');   
+                                        } else ymi('Yoshi');
+                                    }
+                                }
+                            }
+                        }
+                    }
+            }
+            function ymi(s){
+                document.body.innerHTML='<h1>Your main is: '+s+'</h1>';   
+            }
+        </script>
+    </body>
+</html>
