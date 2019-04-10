@@ -2,6 +2,7 @@
 <html>
     <head>
         <title>Choose Your MAIN</title>
+        <link rel='shortcut icon' href='http://vignette1.wikia.nocookie.net/videogames-fanon/images/f/f3/SmashBall.png/revision/latest?cb=20130806195710'>
         <style>
             body{
                 text-align: center; 
@@ -13,7 +14,7 @@
             }
             h1{
                 font-family: smashbros;
-                text-shadow: 2px 2px black;
+                text-shadow: 4px 4px black;
                 color: white;
             }
             button{
@@ -39,7 +40,7 @@
         <script>
             var path=[];
             function ask(q,a){
-                document.body.innerHTML='<h1>'+q+'</h1';
+                document.body.innerHTML='<h1>'+q+'</h1>';
                 for(let i=0;i<a.length;i++){   
                     var b=document.createElement('button');
                     b.innerHTML=a[i];
@@ -361,7 +362,7 @@
                     }
             }
             function ymi(s){
-                document.body.innerHTML='<h1>Your main is: '+s+'</h1>';   
+                document.body.innerHTML='<h1>Your main is: '+s.toUpperCase()+'</h1>';   
             }
         </script>
     </body>
