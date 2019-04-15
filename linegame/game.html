@@ -1,1 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<style>
+		grid{
+			left: 17px;
+			top: 17px;
+			position: absolute;
+            z-index: 1;
+		}
+		dots{
+			position: absolute;
+			background-size: 10px;
+			grid-column-gap: 30px ;
+			width: 450px !important;
+			grid-row-gap: 30px;
+		}
+        dots tile{
+            z-index: 2;   
+        }
+        p{
+            position: absolute;
+            top: 430px;
+        }
+    </style>
+    <script src="helpers.js" ></script>
+    <script src="grid.js" ></script>
+</head>
+<body>
+	<grid>
+	</grid>
+	<dots>
+	</dots>
+    <p>Blue Turn<br>Red: 0<br>Blue: 0</p>
+	<script>
+		var board=new Grid(obj("grid"),8,8,50);
+		var dots=new Grid(obj("dots"),9,9,20);
+        var red=0,blue=0,ts=0;
+		dots.setImageAll ("black.png");
+		dots.setColorAll ("transparent ");
+		board.setColorAll("transparent");
+		var turn=0;
+		for(let x=1;x<=9;x++){
+			for(let y=1;y<=9;y++){
+				var t=dots.getTile(x,y);
+				t.on('click',function(){
+                    if(dots.getImage(x,y)=='url("black.png")'){
+                        console.log(dots.getImage(x,y));
+                        dots.setImage(x,y,(turn?'red':'blue')+'.png');
+                        dots.getTile(x,y).selected=true;
+                        ts++;
+                        select();
+                        turn+=3;
+                        turn%=2;
+                    }
+                });
+			}
+		}
+        function select(){
+            for(let x=1;x<9;x++){
+                for(let y=1;y<9;y++){
+                    if(board.getColor(x,y)=='transparent'){
+                        var a=true;
+                        a&=dots.getTile(x,y).selected;
+                        a&=dots.getTile(x+1,y).selected;
+                        a&=dots.getTile(x,y+1).selected;
+                        a&=dots.getTile(x+1,y+1).selected;
+                        if(a){
+                            board.setColor(x,y,turn?'red':'blue');
+                            if(turn){
+                                red++;   
+                            } else blue++;
+                        }
+                    }
+                }
+            }
+            obj('p').innerHTML=(!turn?'Red':'Blue')+' Turn<br>Red: '+red+'<br>Blue: '+blue;
+            if(ts==81){
+                if(red>blue){
+                    alert('Red Wins');   
+                } else if(red<blue){
+                    alert('Blue Wins');   
+                } else alert('Tie');
+            }
+        }
+	</script>
+</body>
+</html>
 
