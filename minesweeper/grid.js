@@ -2,6 +2,7 @@ var Grid=function(obj,w,h,t){
     obj.style.display='grid';
     obj.style.gridTemplateColumns='repeat(auto-fill,minmax(0px,'+t+'px))';
     obj.style.width=t*w+'px';
+    var tiles=[];
     for(let i=0;i<w*h;i++){
         var e=document.createElement('tile');
         e.style.width=t+'px';
@@ -9,8 +10,8 @@ var Grid=function(obj,w,h,t){
         e.style.backgroundColor=rColor();
         e.style.backgroundSize='contain';
         obj.appendChild(e);
+        tiles.push(e);
     }
-    var tiles=obj.getElementsByTagName('tile');
     function pos(x,y){
         return  y*w-w-1+x;
     }
@@ -86,4 +87,10 @@ var Grid=function(obj,w,h,t){
             }
         }
     };
+    this.getElement=function(){
+        return obj;   
+    }
+    this.getTiles=function(){
+        return tiles;   
+    }
 }
