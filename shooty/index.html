@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Game</title>
+        <style>
+            body{ 
+            }
+            grid{
+                border: 3px solid black;   
+            }
+        </style>
+        <script src=grid.js></script>
+        <script src=helpers.js></script>
+    </head>
+    <body>
+        <grid></grid>
+        <script>
+            var board=new Grid(obj('grid'),15,15,60);
+            board.setColorAll('black');
+            var px=1,py=1;
+            var bullets=[],btd=[];
+            updatePlayer(0,0);
+            function updatePlayer(dx,dy){
+                board.setImage(px,py,'');
+                if(board.isInBounds(px+dx,py+dy)){
+                    px+=dx;
+                    py+=dy;
+                }
+                board.setImage(px,py,'player.png');
+            }
+            
+            document.on('keydown',function(e){
+                switch(e.keyCode){
+                    case 38: updatePlayer(0,-1); break;
+                    case 40: updatePlayer(0,1); break;
+                    case 37: updatePlayer(-1,0); break;
+                    case 39: updatePlayer(1,0); break;
+                    case 32: shoot(); break;
+                }
+            });
+            
+            function shoot(){
+                bullets.push({x:px,y:py,d:[0,-1]});
+                bullets.push({x:px,y:py,d:[0,1]});
+                bullets.push({x:px,y:py,d:[1,0]});
+                bullets.push({x:px,y:py,d:[-1,0]});
+                updBullets();
+            }
+            function updBullets(){
+                for(let i=0;i<bullets.length;i++){
+                    var t=bullets[i];
+                    board.setImage(t.x,t.y,'');
+                    if(board.isInBounds(t.x+t.d[0],t.y+t.d[1])){
+                        t.x+=t.d[0];
+                        t.y+=t.d[1];
+                    } else {
+                        btd.push(i);
+                    }
+                    board.setImage(t.x,t.y,'bullet.png');
+                }
+                for(let i=0;i<btd.length;i++){
+                    var b=bullets[btd[i]];
+                    board.setImage(b.x,b.y,'');
+                    bullets.splice(btd[i],1);
+                }
+                if(btd.length>0){
+                    btd=[];
+                }
+            }
+            loop();
+            function loop(){
+                setTimeout(function(){
+                    requestAnimationFrame(loop);
+                    updatePlayer(0,0);
+                    updBullets();
+                    
+                },1000/10);   
+            }
+        </script>
+    </body>
+</html>
