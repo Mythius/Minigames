@@ -1,1 +1,39 @@
-
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>3d Maze</title>
+        <style>
+            body{
+                background-color: gray;   
+            }
+            div{
+                position: absolute;
+                transform: rotate(60deg) rotateX(-60deg) rotateY(60deg) rotateZ(0deg);
+                left: 100px;
+                top: 0px;
+                border: 8px solid black;
+                transition: transform .3s;
+            }
+            tile{
+                transition: background-color .3s;   
+            }
+            .last{
+                box-shadow: 0px 0px 50px black;
+            }
+        </style>
+        <script src=helpers.js></script>
+        <script src=grid.js></script>
+    </head>
+    <body>
+        <input type=file accept='.3DM'>
+        <button>Download</button>
+        <button id=new>New</button>
+        <button id=load>Load a file</button>
+        <script src=3dmaze.js></script>
+        <script>
+            obj('#load').on('click',function(){
+                xml();
+            });
+        </script>
+    </body>
+</html>
