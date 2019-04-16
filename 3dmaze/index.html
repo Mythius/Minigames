@@ -32,7 +32,9 @@
         <script src=3dmaze.js></script>
         <script>
             obj('#load').on('click',function(){
-                xml();
+                xml('https://cdn.jsdelivr.net/gh/Mythius/Minigames@master/3dmaze/6x6.3dm',function(e){
+                    load(e.split('\n'));
+                });
             });
         </script>
     </body>
