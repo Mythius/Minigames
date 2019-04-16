@@ -1,1 +1,152 @@
-
+<!DOCTYPE html>
+<html>
+    <head>
+    <title>Undertile</title>
+        <style>
+            body{
+                background-color: #888;
+                margin: 0;
+                font-family: sans-serif;
+                color: white;
+            }
+            *{
+                margin: 0;  
+            }
+            h1{
+                width: 100%;
+                background-color: red;
+                padding: 18px;
+            }
+            nav{
+                background-color: black;
+                padding: 25px;
+                padding-left: 0;
+                width: 100%;
+            }
+            nav ul{
+                display: inline;
+                list-style-type: none;
+                padding:0;
+                padding-left: 10px;
+            }	
+            nav li{
+                display: inline;
+                padding: 15px;
+                border: 1px solid white;
+                width: 15%;
+                margin-right: 10px;
+            }
+            nav li:hover{
+                background-color: #444;
+            }
+            nav a{
+                color: white;
+                text-decoration: none;
+            }
+            button{
+                border: 0;
+                outline: 0;
+                background-color: Transparent;
+                color: white;
+                font-size: 1em;
+            }
+            main{
+                background-color: blue;
+                padding: 15px;
+                width: 100%;
+            }
+            .a{
+                width: 98%;
+                padding-left: 1%;
+                padding-right: 1%;
+            }
+            div div{
+                display: block;   
+            }
+            upload{
+                background-color: black;
+                padding: 5px;
+                border: 1px solid white;
+                display: block;
+            }
+            upload button{
+                background-color: gray;
+                color: black;
+            }
+            upload button:hover{
+                background-color: white;   
+            }
+        </style>
+        <script src=xml.js></script>
+        <script src=upload.js></script>
+    </head>
+    <body>
+        <h1 class=a>Welcome to Undertile</h1>
+        <nav class=a>
+            <ul>
+                <li><button id=d>Load Default Level>></button></li>
+                <li><button id=le>Level Editor>></button></li>
+                <li><button id=r>Random Level>></button></li>
+                <li><button id=c>Custom Level>></button></li>
+                <li><a href=compiler.html>Compile files</a></li>
+            </ul>
+        </nav>
+        <main class=a>
+            <h3>Nyeh Heh Heh!</h3><br>
+            Width: <input id=w><br>
+            Height: <input id=h><br>
+            <div>
+                Custom Level Code: <input id=cc placeholder='enter custom code'>
+            </div>
+            <br>
+            <upload>
+                <input id=f type=file accept='.myt'>
+                <br><br>
+                <ul>
+                </ul>
+            </upload>
+        </main>
+        <script>
+            var href='game.html?';
+            function obj(id){return document.querySelector(id);}
+            function random(min,max){
+                return Math.floor(min+Math.random()*(max-min+1));   
+            }
+            obj('#d').addEventListener('click',function(){
+                var a;
+                xml('https://rawgit.com/Mythius/UndertileApp/master/levels.txt',function(e){
+                    a=e.split('\n');
+                    href+=a[random(0,a.length)];
+                    location.href=href;
+                });
+            });
+            obj('#le').addEventListener('click',function(){
+                var a='game.html?';
+                var w=Number(obj('#w').value);
+                var h=Number(obj('#h').value);
+                for( let i=0;i<w*h;i++){
+                       a+='4';
+                }
+                a+=','+w+'.'+h;
+                location.href=a;
+            });
+            obj('#r').addEventListener('click',function(){
+                
+                var a='game.html?';
+                var w=Number(obj('#w').value);
+                var h=Number(obj('#h').value);
+                for( let i=0;i<w*h;i++){
+                       a+=random(0,8);
+                }
+                a+=','+w+'.'+h;
+                location.href=a;
+            });
+            obj('#c').addEventListener('click',function(){
+                var a='game.html?';
+                var c=obj('#cc').value;
+                location.href=a+c;
+            });
+            obj('#f').addEventListener('change',readSingleFile,false);
+        </script>
+    </body>
+</html>

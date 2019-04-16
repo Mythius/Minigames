@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Compiler</title>
+        <style>
+            
+        </style>
+    </head>
+    <body>
+        <a href='index.html'>Return Home</a><br>
+        <input multiple id=a type=file accept='.myt'>
+        <p></p>
+        <script>
+            var fi;
+            function obj(id){return document.querySelector(id);}
+            obj('#a').addEventListener('change',readFiles,false);
+            function readFiles(evt) {
+                var files=[];
+                for(let i =0;i<evt.target.files.length;i++){
+                    var f=evt.target.files[i];
+                    if(f){
+                        var r=new FileReader();
+                        r.onload=function(e) {
+                            var contents=e.target.result;
+                            var cont=contents.split('\n');
+                            for(let j=0;j<cont.length;j++){
+                                files.push(cont[j]);    
+                            }
+                        };
+                        r.readAsText(f);
+                    }
+                }
+                setTimeout(function(){
+                    console.log(files);
+                    fi=files;
+                    var s='';
+                    for(let i=0;i<files.length-1;i++){
+                        s+=files[i]+'\n';
+                    }
+                    s+=files[files.length-1];
+                    download('Underfile.myt',s);
+                },100);
+            }
+            function download(filename,text){
+                var e=document.createElement('a');
+                e.href='data:text/plain;charset=utf-8,'+encodeURIComponent(text);
+                e.download=filename;
+                e.style.display='none';
+                document.body.appendChild(e);
+                e.click();
+                document.body.removeChild(e);
+            }
+        </script>
+    </body>
+</html>

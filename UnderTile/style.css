@@ -1,0 +1,55 @@
+#game{
+    background-color: black;
+    display: grid;
+    width: 750px;
+    grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+    border: 2px solid black;
+}
+            
+.tile{
+    width: 50px;
+    height: 50px;
+}
+            
+#player{
+    width: 45px;
+    height: 45px;
+    background-color: black;
+    border-radius: 25px;
+    position: absolute;
+    transition: top .3s, left .3s;
+    top: 45;
+    left: 45;
+}
+
+body{
+    background-color: #222;
+    text-align: center;
+    margin:0px;
+}
+
+#arrows{
+    display: grid;
+    width: 750px;
+    grid-template-columns: repeat(auto-fill, minmax(150px,1fr));
+}
+
+button{
+    height: 40px;
+    float: left;
+}
+box{
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    z-index: 1;
+    position: absolute;
+    width: 63px;
+}
+col{
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
+}
