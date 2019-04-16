@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>MINIGAMES</title>
+        <style>
+            body{
+                background-color: #222;
+                color: green;
+                font-family: 'Press Start 2P', cursive;
+                text-align: center;
+            }
+            game{
+                width: 100%;
+                height: 200px;
+                background-color: black;
+            }
+            games{
+                grid-template-columns: 32% 32% 32%;
+                width: 100%;
+                display: grid;
+                grid-column-gap: 1%;
+                grid-row-gap: 10px;
+            }
+            button{
+                background-color: gray;
+                border: 3px solid white;
+                outline: 0;
+            }
+            h3{
+                color: white;   
+            }
+        </style>
+        <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+    </head>
+    <body>
+        <h1>Minigames</h1>
+        <games>
+            <game>
+                <h3>3D MAZE</h3>
+                <button>Launch>></button>
+            </game>
+            <game>
+                <h3>The Square Game</h3>
+                <button>Launch>></button>
+            </game>
+            <game>
+                <h3>Minesweeper</h3>
+                <button>Launch>></button>
+            </game>
+            <game>
+                <h3>Othello (reversi)</h3>
+                <button>Launch>></button>
+            </game>
+            <game>
+                <h3>Pong</h3>
+                <button>Launch>></button>
+            </game>
+            <game>
+                <h3>Snake</h3>
+                <button>Launch>></button>
+            </game>
+            <game>
+                <h3>Undertale Tilegame</h3>
+                <button>Launch>></button>
+            </game>
+        </games>
+        <script>
+            var a=document.querySelectorAll('button');
+            var links=['3dmaze/index.html','linegame/game.html','minesweeper/minesweeper.html','Othello/othello.html','pong/pong.html','Snake/index.html','UnderTile/index.html'];
+            Object.prototype.on=function(a,b,c){
+                this.addEventListener(a,b,c);  
+            };
+            for(var i=0;i<a.length;i++){
+                a[i].p=i;
+                a[i].on('click',function(){
+                    location.href=links[this.p];
+                });
+            }
+        </script>
+    </body>
+</html>
