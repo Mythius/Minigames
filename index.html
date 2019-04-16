@@ -1,89 +1,41 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Evil hangman</title>
+        <title>3d Maze</title>
         <style>
-            
+            body{
+                background-color: gray;   
+            }
+            div{
+                position: absolute;
+                transform: rotate(60deg) rotateX(-60deg) rotateY(60deg) rotateZ(0deg);
+                left: 100px;
+                top: 0px;
+                border: 8px solid black;
+                transition: transform .3s;
+            }
+            tile{
+                transition: background-color .3s;   
+            }
+            .last{
+                box-shadow: 0px 0px 50px black;
+            }
         </style>
         <script src=helpers.js></script>
+        <script src=grid.js></script>
     </head>
     <body>
-        <input id=l maxlength=1><button>Guess</button><br>
-        <right>Correct: </right><br>
-        <wrong>Incorrect: </wrong>
+        <input type=file accept='.3DM'>
+        <button>Download</button>
+        <button id=new>New</button>
+        <button id=load>Load a Default Level</button>
+        <script src=3dmaze.js></script>
         <script>
-            //++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-            start(4,20);// the lower the numbers are the harder it is +
-            // ~~~^ ^~~~~~~~~~~~~~~~~~~| amount of times you      |  +
-            // shortest word allowed   | can get your guess wrong |  +
-            //++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-            
-            function start(d,g){
-                var words,cor=[' ','-'],wro=[],guesses=0,pl=true,I_AM_A_CHEATER=false;
-                xml('https://cdn.jsdelivr.net/gh/Mythius/uploads@master/nouns3.txt',function(e){
-                    words=e.split('\n'); 
-                    drop(d);
+            obj('#load').on('click',function(){
+                xml('https://cdn.jsdelivr.net/gh/Mythius/Minigames@master/3dmaze/6x6.3dm',function(e){
+                    load(e.split('\n'));
                 });
-                obj('button').on('click',guess);
-                document.on('keydown',function(e){
-                    if(e.keyCode==13) guess();
-                });
-
-                function drop(l){
-                    var ww=[];
-                    for(let i=0;i<words.length;i++){
-                        if(words[i].length>=l){
-                            ww.push(words[i].toLowerCase().trim());   
-                        }
-                    }
-                    words=ww;
-                }
-
-                function guess(){
-                    if(pl){
-                        console.clear();
-                        var ch=obj('#l').value.toLowerCase();
-                        obj('#l').value='';
-                        var w2=[];
-                        var isal=true;
-                        for(let i=0;i<words.length;i++){
-                            isal&=words[i].indexOf(ch)!=-1;   
-                        }
-                        if(!isal){
-                            if(wro.indexOf(ch)==-1){
-                                guesses++;
-                                obj('wrong').innerHTML+=ch+' ';
-                                wro.push(ch);
-                                for(let i=0;i<words.length;i++){
-                                    if(words[i].toLowerCase().trim().indexOf(ch)==-1){
-                                        w2.push(words[i]);
-                                    }
-                                }
-                                words=w2;
-                                if(guesses>g){
-                                    document.body.innerHTML+='<h3>You lose, the word was: '+words[0]+'<h3>';   
-                                }
-                            }
-                        } else {
-                            if(cor.indexOf(ch)==-1)obj('right').innerHTML+=ch+' ';
-                            cor.push(ch);
-                            guesses++;
-                            if(words.length==1){
-                                var word=words[0].trim(),ist=true;
-                                for(let i=0;i<word.length;i++){
-                                    ist&=cor.indexOf(word.charAt(i))!=-1;
-                                }
-                                if(ist){
-                                    document.body.innerHTML+='<br><h3>You Win! The word was: '+word+'</h3>';
-                                    document.body.innerHTML+='(it only took you '+guesses+' guesses)';
-                                    pl=false;
-                                }
-                            }
-                        }
-                    }
-                    if(I_AM_A_CHEATER)console.log(words);
-                }
-            }
+            });
         </script>
     </body>
 </html>
