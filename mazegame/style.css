@@ -1,0 +1,45 @@
+body{
+	margin: 0;
+	background-color: gray;
+}
+game{
+	margin: 80px;
+}
+#start{
+	top: 0;
+}
+.popup{
+	position: absolute;
+	box-sizing: border-box;
+	width: 230px;
+	height: 150px;
+	left: 165px;
+	top: 200px;
+	background-color: black;
+	color: white;
+	font-family: courier;
+	font-size: 18px;
+	padding-top: 50px;
+	border: 1px solid;
+	opacity: .9;
+	text-align: center;
+	animation: float 2s infinite;
+}
+tile{
+	box-sizing: border-box;
+	image-rendering: pixelated;
+	border-radius: 15px;
+	box-shadow: 8px 8px 5px black;
+}
+img{
+	image-rendering: pixelated;
+	width: 80px;
+	height: 80px;
+	position: absolute;
+}
+
+@keyframes float{
+	0% { top: 200px; }
+	50% { top: 230px; }
+	100% { top: 200px; }
+}
