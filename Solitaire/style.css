@@ -1,0 +1,8 @@
+body{
+	background-color: #444;
+}
+.card{
+	width: 100px;
+	transition: transform .15s, left .15s, top .15s;
+	position: absolute;
+}
