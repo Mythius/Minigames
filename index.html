@@ -34,59 +34,37 @@
     </head>
     <body>
         <h1>Minigames</h1>
-        <games>
-            <game>
-                <h3>3D MAZE</h3>
-                <button>Launch>></button>
-            </game>
-            <game>
-                <h3>The Square Game</h3>
-                <button>Launch>></button>
-            </game>
-            <game>
-                <h3>Minesweeper</h3>
-                <button>Launch>></button>
-            </game>
-            <game>
-                <h3>Othello (reversi)</h3>
-                <button>Launch>></button>
-            </game>
-            <game>
-                <h3>Pong</h3>
-                <button>Launch>></button>
-            </game>
-            <game>
-                <h3>Snake</h3>
-                <button>Launch>></button>
-            </game>
-            <game>
-                <h3>Undertale Tilegame</h3>
-                <button>Launch>></button>
-            </game>
-            <game>
-                <h3>2048</h3>
-                <button>Launch>></button>
-            </game>
-            <game>
-                <h3>Tron</h3>
-                <button>Launch>></button>
-            </game>
-            <game>
-                <h3>Sliding Maze</h3>
-                <button>Launch>></button>
-            </game>
-        </games>
+        <games></games>
         <script>
-            var a=document.querySelectorAll('button');
-            var links=['3dmaze/index.html','linegame/game.html','minesweeper/minesweeper.html','Othello/othello.html','pong/pong.html','Snake/index.html','UnderTile/index.html','2048/index.html','Tron/index.html','mazegame/index.html'];
+
+            function create(el,text=''){
+                let e = document.createElement(el);
+                e.innerHTML = text;
+                return e;
+            }
             Object.prototype.on=function(a,b,c){
                 this.addEventListener(a,b,c);  
             };
-            for(var i=0;i<a.length;i++){
-                a[i].p=i;
-                a[i].on('click',function(){
-                    location.href=links[this.p];
+            var games = [
+                {title:'3D Maze',link:'3dmaze/index.html',width:407,height:583},
+                {title:'Line Game',link:'linegame/game.html',width:385,height:503},
+                {title:'Othello',link:'Othello/othello.html',width:336,height:420},
+                {title:'Pong',link:'pong/pong.html',width:919,height:619},
+                {title:'Snake',link:'Snake/index.html',width:618,height:618},
+                {title:'Slide Maze',link:'mazegame/index.html',width:563,height:563},
+                {title:'Evil Hangman',link:'evilhangman/index.html',width:301,height:156},
+                {title:'Dr. Mario',link:'DrMario/index.html',width:368,height:673},
+                {title:'Smash Bros Ultimate <br> Which Character are you?',link:'mainSmash.html',width:767,height:420},
+            ]
+            for(let game of games){
+                let g = create('game');
+                g.appendChild(create('h3',game.title))
+                let button = create('button','Launch >>');
+                g.appendChild(button);
+                button.on('click',e=>{
+                    window.open(game.link,game.title,`width=${game.width},height=${game.height}`);
                 });
+                document.querySelector('games').appendChild(g);
             }
         </script>
     </body>
