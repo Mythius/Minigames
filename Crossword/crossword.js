@@ -27,7 +27,7 @@
 			for(let word of result){
 				let ix = words.indexOf(word.word);
 				let def = hints[ix];
-				answers.push({word:word.word,def,dir:word.dir});
+				answers.push({word:word.word,def,dir:word.dir,pos:word.pos});
 			}
 			console.log(answers);
 			printHints();
@@ -98,7 +98,10 @@
 	function printHints(){
 		let i=1;
 		for(let hint of answers){
-			title = i + ' ' + (hint.dir=='h' ? 'Across' : 'Down') + ': ';
+			let pos = hint.pos;
+			let tile = grid.getTileAt(pos.x,pos.y);
+			console.log(hint,tile,tile.num);
+			title = tile.num + ' ' + (hint.dir=='h' ? 'Across' : 'Down') + ': ';
 			obj('p').innerHTML += title + hint.def + '<br>';
 			i++;
 		}
@@ -203,18 +206,21 @@
 		let word = words[random(0,words.length-1)].trim();
 		let data = findAvailSquare(word);
 		var dir = 'h';
+		let top_left_pos_square;
 		if(data.square !== null){
 			var offset = 0;
 			if(data.square.letter.length!=0){
 				offset = word.indexOf(data.letter);
 			}
 			if(data.dir == 'h'){
+				top_left_pos_square = grid.getTileAt(data.square.x-offset,data.square.y);
 				for(let i=0;i<word.length;i++){
 					let s = grid.getTileAt(data.square.x+i-offset,data.square.y);
 					s.letter = word[i];
 					dir = 'h';
 				}
 			} else if(data.dir == 'v'){
+				top_left_pos_square = grid.getTileAt(data.square.x,data.square.y-offset);
 				for(let i=0;i<word.length;i++){
 					let s = grid.getTileAt(data.square.x,data.square.y+i-offset);
 					s.letter = word[i];
@@ -226,7 +232,7 @@
 		} else {
 			return addWord();
 		}
-		return {word,dir};
+		return {word,dir,pos:{x:top_left_pos_square.x,y:top_left_pos_square.y}};
 	}
 
 	function numberSquares(){
