@@ -114,7 +114,7 @@
             }
             obj('#d').addEventListener('click',function(){
                 var a;
-                xml('https://rawgit.com/Mythius/UndertileApp/master/levels.txt',function(e){
+                xml('default.myt',function(e){
                     a=e.split('\n');
                     href+=a[random(0,a.length)];
                     location.href=href;

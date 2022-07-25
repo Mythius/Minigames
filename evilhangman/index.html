@@ -21,7 +21,7 @@
             function start(d,g){
                 var words,cor=[' ','-'],wro=[],guesses=0,pl=true,I_AM_A_CHEATER=true;
                 ;
-                xml('https://cdn.jsdelivr.net/gh/Mythius/uploads@master/nouns3.txt',function(e){
+                xml('words.txt',function(e){
                     words=e.split('\n'); 
                     drop(d);
                 });
