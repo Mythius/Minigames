@@ -1,0 +1,197 @@
+<html>
+    <head>
+        <title>Binary To Hexadecimal</title>
+        <meta charset="UTF-8">
+        <style>
+            body{
+                text-align: center;
+                
+                
+            }
+            #s1{
+                border: 1px solid white;
+                background-color: #000;
+                margin-left: auto;
+                margin-right: auto;
+                margin-bottom: 5;
+            }
+            td{
+                border: 1px solid white;
+            }
+            button{
+                margin-bottom: 5;
+            }
+        </style>
+    </head>
+    <body>
+        <h2>Binary Table to Hex #0000</h2>
+        <table id=s1>
+            <tr>
+                <td><input type=checkbox></td>
+                <td><input type=checkbox></td>
+                <td><input type=checkbox></td>
+                <td><input type=checkbox></td>
+            </tr>
+            <tr>
+                <td><input type=checkbox></td>
+                <td><input type=checkbox></td>
+                <td><input type=checkbox></td>
+                <td><input type=checkbox></td>
+            </tr>
+            <tr>
+                <td><input type=checkbox></td>
+                <td><input type=checkbox></td>
+                <td><input type=checkbox></td>
+                <td><input type=checkbox></td>
+            </tr>
+            <tr>
+                <td><input type=checkbox></td>
+                <td><input type=checkbox></td>
+                <td><input type=checkbox></td>
+                <td><input type=checkbox></td>
+            </tr>
+        </table>
+        <button id=b>Uncheck Boxes</button>
+        <br>
+        <button id=s>Submit</button>
+
+        <p id=out>0x0000</p> 
+        
+        <input placeholder='Enter Hex Code Here' onsearch='make()' id=inp type=search>
+              
+        
+        <script>    //JAVASCRIPT
+            
+            function get(id){return document.getElementById(id);}
+            function html(id,html){return get(id).innerHTML = html;}
+            function event(sr,ev,fn){sr.addEventListener(ev,fn);}
+            function show(id){get(id).style.visibility = null;}
+            function hide(id){get(id).style.visibility = 'hidden';}
+            
+            var s = get('s');
+            var sn = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15];
+            var syms = ['0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'];
+            var bvalue = [128,64,32,16,8,4,2,1];
+            
+            
+            function ctn(bin){
+                var n = 0;
+                var i;
+                for(i = 0;i < 8;i++){
+                    if(bin.charAt(i) == 1){
+                        n += bvalue[i];
+                    }
+                }
+                return n;
+            }
+            
+            function getItem(arr1,arr2,sym){return arr2[arr1.indexOf(sym)];}
+            
+            function cth(n){
+                var sym = '';
+                var t = n % 16;
+                var o = ((n - t) / 16);
+                var g = getItem(sn,syms,o);
+                g += getItem(sn,syms,t);
+                return g;
+            }
+            
+            function binToHex(bin){
+                return cth(ctn(bin));
+            }
+            
+            function binToNum(bin){
+                return ctn(bin);
+            }
+            
+            var ch = new Array();
+            function checkbox(io){
+                ch = document.getElementsByTagName('input');
+                for(var i = 0; i < ch.length; i++){
+                    if (ch[i].type == 'checkbox'){
+                        ch[i].checked = io;
+                    }
+                }
+            }
+       
+            var b = get('b');
+            b.addEventListener('click',off);
+            function off(){
+                checkbox(false);
+            }
+
+            var s = get('s');
+            s.addEventListener('click',submit);
+            
+            function submit(){
+                ch = document.getElementsByTagName('input');
+                var o1 = '';
+                var o2 = '';
+                var i;
+                for(i = 0; i < 8; i++){
+                    if(ch[i].type == 'checkbox'){
+                        if(ch[i].checked){o1 += 1;}else{o1 += 0;}
+                    }
+                }
+                for(i = 8; i < 16; i++){
+                    if(ch[i].type == 'checkbox'){
+                        if(ch[i].checked){o2 += 1;}else{o2 += 0;}
+                    }
+                }
+                var a1 = binToHex(o1);
+                var a2 = binToHex(o2);
+                html('out','0x' + a1 + a2);
+            } 
+            
+            function htn(hex){
+                var a1 = tohex(hex.slice(2,4));
+                var a2 = tohex(hex.slice(4));
+                var a = [a1,a2];
+                return a;
+            }
+            
+            function tohex(hex){
+                var n1 = getItem(syms,sn,hex.slice(0,1));
+                var n2 = getItem(syms,sn,hex.slice(1,2));
+                return (n1 * 16) + n2;
+            }
+            
+            function buildPiece(code){
+                ch = document.getElementsByTagName('input');
+                var arr = [];
+                var bit, blocks = code;
+                for(bit = 0x8000 ; bit > 0 ; bit = bit >> 1) {
+                    if (blocks & bit) {
+                        arr.push(true);
+                    } else {arr.push(false);}
+                }
+                var a = 0;
+                for(var i = 0; i < arr.length; i++){
+                    if(ch[i].type == 'checkbox'){
+                        ch[i].checked = arr[a];
+                        a++;
+                    }
+                }
+            }
+            
+            function make(){
+                var s = get('inp').value;
+                buildPiece(s);
+                get('inp').value = '';
+                hide('inp');
+            }
+            
+            hide('inp');
+            
+            event(document,'keydown',keydown);
+            function keydown(ev){
+                switch(ev.keyCode){
+                    case 85: show('inp');
+                }
+            }
+        
+            
+              
+        </script>
+    </body>
+</html>
