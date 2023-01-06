@@ -2,6 +2,7 @@
 <html>
     <head>
         <title>MINIGAMES</title>
+        <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
         <style>
             body{
                 background-color: #222;
@@ -31,10 +32,17 @@
                 color: white;   
             }
         </style>
-        <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+        <link rel=stylesheet href=style.css>
     </head>
     <body>
         <h1>Minigames</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="contact.html">Contact</a>
+            <a href="/minigames">Games</a>
+            <a href="about.html">About Me</a>
+        </nav>
+        <br>
         <games></games>
         <script>
 
@@ -61,6 +69,7 @@
                 {title:'Dr. Mario',link:'DrMario/index.html',width:368,height:673},
                 {title:'Undertale Tile Minigame',link:'UnderTile/',width:908,height:500},
                 {title:'Crossword Puzzle',link:'Crossword/',width:700,height:700},
+                {title:'Sudoku',link:'Sudoku/',width:700,height:700},
                 {title:'Smash Bros Ultimate <br> Which Character are you?',link:'mainSmash.html',width:767,height:420},
             ]
             for(let game of games){
