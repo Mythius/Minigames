@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Sudoku</title>
+	<style>
+		canvas{
+			display: block;
+			margin: auto;
+			background-color: black;
+		}
+		body{
+			text-align: center;
+		}
+		button{
+			padding: 5px 30px 5px 30px;
+			background-color: black;
+			color: white;
+			font-weight: bold;
+			font-size: 18px;
+			border: 2px solid white;
+			border-radius: 4px;
+		}
+	</style>
+	<script src="helpers.js"></script>
+	<script src="grid.js"></script>
+	<script src="input.js"></script>
+</head>
+<body>
+	<canvas width=600 height=600></canvas>
+	<button>Solve</button>
+	<button onclick="generateSolution()">Generate Solution</button>
+	<script src="main.js"></script>
+</body>
+</html>
