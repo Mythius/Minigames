@@ -17,11 +17,21 @@
 		p{
 			text-align: center;
 		}
+		#hints{
+			display: grid;
+			grid-template-columns: 50% 50%;
+		}
+		body{
+			text-align: center;
+		}
 	</style>
 </head>
 <body>
 	<canvas width=500 height=500></canvas>
-	<p></p>
+	<div id=hints>
+		<p id=accross>Across:<br></p><p id=down>Down:<br></p>
+	</div>
+	<button onclick="Crossword.toggleAnswers()">Show Answers</button>
 	<script src="main.js"></script>
 </body>
 </html>

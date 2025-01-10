@@ -20,7 +20,10 @@
 			words = data.split('\n').map(e=>e.trim());
 			draw();
 			Crossword.words = words;
-			for(let i=0;i<35;i++) result.push(addWord());
+			for(let i=0;i<50;i++){
+				let word = addWord();
+				if(word) result.push(word);
+			} 
 			numberSquares();
 			draw();
 			result = [...new Set(result)];
@@ -97,14 +100,25 @@
 
 	function printHints(){
 		let i=1;
-		for(let hint of answers){
+		let across = answers.filter(e=>e.dir=='h');
+		let down = answers.filter(e=>e.dir!='h');
+		let a_arr = [];
+		let d_arr = [];
+		for(let hint of answers.sort(e=>e.pos)){
 			let pos = hint.pos;
 			let tile = grid.getTileAt(pos.x,pos.y);
 			console.log(hint,tile,tile.num);
 			title = tile.num + ' ' + (hint.dir=='h' ? 'Across' : 'Down') + ': ';
-			obj('p').innerHTML += title + hint.def + '<br>';
+			if(hint.dir=='h'){
+				a_arr.push({id:'#accross',text:title + hint.def + '<br>',n:tile.num})
+			} else {
+				d_arr.push({id:'#down',text:title + hint.def + '<br>',n:tile.num})
+			}
 			i++;
 		}
+		const asc=(a,b)=>a.n-b.n;
+		for(let t of a_arr.sort(asc)) obj(t.id).innerHTML += t.text;
+		for(let t of d_arr.sort(asc)) obj(t.id).innerHTML += t.text;
 	}
 
 	function checkWordInDir(word,x,y,dx,dy){
@@ -202,8 +216,10 @@
 		return {square,dir,letter:finaletter};
 	}
 
-	function addWord(){
+	function addWord(depth=2){
 		let word = words[random(0,words.length-1)].trim();
+		if(depth==0) return;
+		if(result.length && result.map(e=>e.word).includes(word)) return addWord(depth-1);
 		let data = findAvailSquare(word);
 		var dir = 'h';
 		let top_left_pos_square;
@@ -230,7 +246,7 @@
 				console.error('Something went wrong');
 			}
 		} else {
-			return addWord();
+			return addWord(depth-1);
 		}
 		return {word,dir,pos:{x:top_left_pos_square.x,y:top_left_pos_square.y}};
 	}
@@ -275,6 +291,10 @@
 	Crossword.lineIsValid = lineIsValid;
 	Crossword.draw = draw;
 	Crossword.getLetter = getLetter;
+
+	Crossword.toggleAnswers = function(){
+		Crossword.show_letters = !Crossword.show_letters;
+	}
 
 	function getLetter(){
 		let s = grid.getActiveTile();

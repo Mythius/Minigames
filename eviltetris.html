@@ -91,7 +91,7 @@ v+1E3){l=Math.round(u*1E3/(j-v));w=Math.min(w,l);x=Math.max(x,l);s(y.data,Math.m
     var i = { size: 4, blocks: [0x0F00, 0x2222, 0x00F0, 0x4444], color: 'cyan'   };
     var j = { size: 3, blocks: [0x44C0, 0x8E00, 0x6440, 0x0E20], color: 'blue'   };
     var l = { size: 3, blocks: [0x4460, 0x0E80, 0xC440, 0x2E00], color: 'orange' };
-    var o = { size: 2, blocks: [0xCC00, 0xCC00, 0xCC00, 0xCC00], color: 'yellow' };
+    var o = { size: 2, blocks: [0x2BD7, 0x7D36, 0xEBD4, 0x6CBE], color: 'yellow' };
     var s = { size: 3, blocks: [0x06C0, 0x8C40, 0x6C00, 0x4620], color: 'green'  };
     var t = { size: 3, blocks: [0x0E40, 0x4C40, 0x4E00, 0x4640], color: 'purple' };
     var z = { size: 3, blocks: [0x0C60, 0x4C80, 0xC600, 0x2640], color: 'red'  };
@@ -391,12 +391,6 @@ v+1E3){l=Math.round(u*1E3/(j-v));w=Math.min(w,l);x=Math.max(x,l);s(y.data,Math.m
       }
       
       
-      
-      var db=openDatabase('derp','1.0','derp',10*1024*1024);
-      sql('CREATE TABLE highScore ( name varchar(20) , score int )');
-      
-      sql('INSERT INTO highScore ( score ) VALUES ( '+vscore+' )');
-    
     
     
     var theme = new Audio();
